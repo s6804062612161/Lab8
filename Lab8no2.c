@@ -1,8 +1,9 @@
 #include <stdio.h>
 int checkscore(char std[],char key[]);
+int checkitem(char std[][10],char key[]);
 
 int main() {
-    int i,j;
+    int i;
     char ans[8][10]={
         	{'A','B','A','C','C','D','E','E','A','D'},//7
 			{'D','B','A','B','C','A','E','E','A','D'},//6
@@ -17,9 +18,18 @@ int main() {
    	for (i=0;i<8;i++){
 		printf("std %d => %d\n", (i+1), checkscore(ans[i],keys));
 	}
+	printf("Number of people who answered question 1 correct is %d\n",checkitem(ans,keys));
 }
 
-
+int checkitem(char std[][10],char key[]){
+	int amount=0;
+	int i,j;
+	for (i=0;i<8;i++){
+		if (std[i][0]==key[0])
+			amount++;
+	}
+	return amount;
+}
 int checkscore(char std[],char key[]){
 	int score=0,i;
 	for (i=0;i<10;i++){
