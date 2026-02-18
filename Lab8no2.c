@@ -1,6 +1,7 @@
 #include <stdio.h>
 int checkscore(char std[],char key[]);
 int checkitem(char std[][10],char key[]);
+int the_difficult(char std[][10],char key[]);
 
 int main() {
     int i;
@@ -19,11 +20,35 @@ int main() {
 		printf("std %d => %d\n", (i+1), checkscore(ans[i],keys));
 	}
 	printf("Number of people who answered question 1 correct is %d\n",checkitem(ans,keys));
+	printf("the difficult item is %d\n",the_difficult(ans,keys));
+	
+	return 0;
+}
+
+int the_difficult(char std[][10],char key[]){
+	int amount=0;
+	int difficult=9; 
+	int currentitem,item,result;
+	int i,j;
+	for (i=0;i<10;i++){
+		item = i;	
+		amount=0;
+		for (j=0;j<8;j++){
+			if (std[j][i]==key[i])
+				amount++;		
+		}
+		currentitem=amount;
+		if (difficult > currentitem){
+			difficult = currentitem;
+			result=item+1;	
+		}	
+	}
+	return result;
 }
 
 int checkitem(char std[][10],char key[]){
 	int amount=0;
-	int i,j;
+	int i;
 	for (i=0;i<8;i++){
 		if (std[i][0]==key[0])
 			amount++;
@@ -39,3 +64,4 @@ int checkscore(char std[],char key[]){
 	
 	return score;
 }
+
